@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  discord-bot:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: discord-youtube-bot
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ../.env
+    volumes:
+      - bot_logs:/app/logs
+    networks:
+      - bot_network
+    # Uncomment the following lines if you need to expose a port for health checks
+    # ports:
+    #   - "3000:3000"
+
+    # Resource limits to prevent the container from consuming too much memory
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+volumes:
+  bot_logs:
+    driver: local
+
+networks:
+  bot_network:
+    driver: bridge
