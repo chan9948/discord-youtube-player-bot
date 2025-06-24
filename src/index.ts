@@ -75,7 +75,6 @@ const commands = new Collection(
         if (!url) {
           await interaction.reply({
             content: "You must provide a YouTube URL to play a song.",
-            ephemeral: true,
           });
           return;
         }
@@ -88,7 +87,6 @@ const commands = new Collection(
         if (!channel) {
           await interaction.reply({
             content: "You need to be in a voice channel to play music!",
-            ephemeral: true,
           });
           return;
         }
@@ -118,7 +116,6 @@ const commands = new Collection(
 
         await interaction.reply({
           content: `Playing song from URL: ${url}`,
-          ephemeral: true,
         });
       },
     },
@@ -134,7 +131,6 @@ const commands = new Collection(
         if (!subscription) {
           await interaction.reply({
             content: "No song is currently playing in this channel.",
-            ephemeral: true,
           });
           return;
         }
@@ -144,7 +140,6 @@ const commands = new Collection(
         chanelPlayerSubscriptions.delete(interaction.channelId);
         await interaction.reply({
           content: "Stopped the currently playing song.",
-          ephemeral: true,
         });
       },
     },
@@ -168,7 +163,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
     console.error(`Error executing command ${commandName}:`, error);
     await interaction.reply({
       content: "There was an error while executing this command!",
-      ephemeral: true,
     });
   }
 });
