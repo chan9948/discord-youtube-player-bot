@@ -1,5 +1,5 @@
 {
-  "name": "discord-bot",
+  "name": "discord-youtube-player-bot",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -10,7 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.5.2",
   "dependencies": {
     "@discordjs/opus": "^0.10.0",
     "@discordjs/voice": "^0.18.0",
