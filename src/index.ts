@@ -99,8 +99,12 @@ const commands = new Collection(
 
         const player = createAudioPlayer();
 
-        const stream = getYoutubeAudioStream(url);
-        const resource = createAudioResource(Readable.from(stream));
+        const stream = getYoutubeAudioStream(url, process.env.PROXY_URL);
+        const resource = createAudioResource(Readable.from(stream), {
+          inlineVolume: true,
+        });
+
+        resource.volume?.setVolume(0.5);
 
         player.play(resource);
 
