@@ -35,18 +35,18 @@ fi
 print_status "Building and starting Discord bot container..."
 
 # Stop existing container if running
-docker-compose down 2>/dev/null
+docker compose down 2>/dev/null
 
 # Build and start
-if docker-compose up --build -d; then
+if docker compose up --build -d; then
     print_status "Discord bot container started successfully!"
     print_status "Container name: discord-youtube-bot"
     print_status ""
     print_status "Useful commands:"
-    echo "  View logs:     docker-compose logs -f"
-    echo "  Stop bot:      docker-compose down"
-    echo "  Restart bot:   docker-compose restart"
-    echo "  Shell access:  docker-compose exec discord-bot sh"
+    echo "  View logs:     docker compose logs -f"
+    echo "  Stop bot:      docker compose down"
+    echo "  Restart bot:   docker compose restart"
+    echo "  Shell access:  docker compose exec discord-bot sh"
     print_status ""
     print_status "The bot will automatically restart if it crashes."
 else
