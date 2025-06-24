@@ -119,7 +119,7 @@ const commands = new Collection(
         });
 
         await interaction.reply({
-          content: `load緊呀 等陣啦屌`,
+          content: `收到你 ${url}`,
         });
       },
     },
@@ -143,7 +143,7 @@ const commands = new Collection(
         subscription.connection.destroy();
         chanelPlayerSubscriptions.delete(interaction.channelId);
         await interaction.reply({
-          content: "唔聽咪算9數囉",
+          content: "唔聽咪算鳩數囉",
         });
       },
     },
