@@ -17,7 +17,8 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import dotenv from "dotenv";
-import path from "node:path";
+import { Readable } from "stream";
+import { getYoutubeAudioStream } from "./ytdl";
 
 dotenv.config();
 
@@ -71,6 +72,13 @@ const commands = new Collection(
         if (!interaction.isChatInputCommand()) return;
 
         const url = interaction.options.getString("url");
+        if (!url) {
+          await interaction.reply({
+            content: "You must provide a YouTube URL to play a song.",
+            ephemeral: true,
+          });
+          return;
+        }
         console.log(`Received play command with URL: ${url}`);
 
         const guild = client.guilds.cache.get(interaction.guildId!);
@@ -93,10 +101,8 @@ const commands = new Collection(
 
         const player = createAudioPlayer();
 
-        const resource = createAudioResource(
-          path.join(__dirname, "./output.mp3"),
-          { inlineVolume: true }
-        );
+        const stream = await getYoutubeAudioStream(url);
+        const resource = createAudioResource(Readable.from(stream));
 
         player.play(resource);
 
