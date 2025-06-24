@@ -99,7 +99,7 @@ const commands = new Collection(
 
         const player = createAudioPlayer();
 
-        const stream = await getYoutubeAudioStream(url);
+        const stream = getYoutubeAudioStream(url);
         const resource = createAudioResource(Readable.from(stream));
 
         player.play(resource);
