@@ -55,17 +55,17 @@ const commands = new Collection(
         .setName("ping")
         .setDescription("Replies with Pong!"),
       execute: async (interaction: CommandInteraction) => {
-        interaction.reply(`Pong ${new Date().toISOString()}!`);
+        interaction.reply(`乜撚嘢(${new Date().toISOString()})`);
       },
     },
     {
       data: new SlashCommandBuilder()
         .setName("play")
-        .setDescription("Play a song form YouTube")
+        .setDescription("播歌啦")
         .addStringOption((option) =>
           option
             .setName("url")
-            .setDescription("The YouTube URL of the song to play")
+            .setDescription("你都要有link先播到㗎​")
             .setRequired(true)
         ),
       execute: async (interaction: CommandInteraction) => {
@@ -74,11 +74,11 @@ const commands = new Collection(
         const url = interaction.options.getString("url");
         if (!url) {
           await interaction.reply({
-            content: "You must provide a YouTube URL to play a song.",
+            content: "link定老母?",
           });
           return;
         }
-        console.log(`Received play command with URL: ${url}`);
+        console.info(`Received play command with URL: ${url}`);
 
         const guild = client.guilds.cache.get(interaction.guildId!);
         const member = guild?.members.cache.get(interaction.user.id);
@@ -86,7 +86,7 @@ const commands = new Collection(
 
         if (!channel) {
           await interaction.reply({
-            content: "You need to be in a voice channel to play music!",
+            content: "你都唔係voice chat播乜撚呢?",
           });
           return;
         }
@@ -115,7 +115,7 @@ const commands = new Collection(
         });
 
         await interaction.reply({
-          content: `Playing song from URL: ${url}`,
+          content: `load緊呀 等陣啦屌`,
         });
       },
     },
@@ -130,7 +130,7 @@ const commands = new Collection(
 
         if (!subscription) {
           await interaction.reply({
-            content: "No song is currently playing in this channel.",
+            content: "冇嘢播緊喎 stop乜撚嘢?",
           });
           return;
         }
@@ -139,7 +139,7 @@ const commands = new Collection(
         subscription.connection.destroy();
         chanelPlayerSubscriptions.delete(interaction.channelId);
         await interaction.reply({
-          content: "Stopped the currently playing song.",
+          content: "唔聽咪算9數囉",
         });
       },
     },
@@ -162,7 +162,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   } catch (error) {
     console.error(`Error executing command ${commandName}:`, error);
     await interaction.reply({
-      content: "There was an error while executing this command!",
+      content: "唔知爛撚咗d咩 唔巧意思",
     });
   }
 });
